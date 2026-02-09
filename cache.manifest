@@ -1,0 +1,19 @@
+CACHE MANIFEST 
+# v1.1 - Demons Host
+
+index.html
+cache.manifest
+int64.js
+rop.js
+webkit.js
+kexploit.js
+kexploit-launcher.js
+fakeusb.js
+jb.html
+common/relocator.js
+common/syscalls.js
+common/syscalls2.js
+https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js
+
+NETWORK: 
+*
