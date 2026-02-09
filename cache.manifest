@@ -1,6 +1,8 @@
 CACHE MANIFEST 
-# v2.0 - Absolute Fix
+# v2.5 - Demons Elite Final Update
+# Date: 2026-02-09
 
+CACHE:
 index.html
 int64.js
 rop.js
@@ -8,9 +10,11 @@ webkit.js
 kexploit.js
 kexploit-launcher.js
 fakeusb.js
-common/relocator.js
-common/syscalls.js
-common/syscalls2.js
+jb.html
+Common/relocator.js
+Common/syscalls.js
+Common/syscalls2.js
+https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js
 
 NETWORK: 
 *
