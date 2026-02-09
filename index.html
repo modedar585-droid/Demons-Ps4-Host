@@ -3,19 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DEMONS PS4 ULTRA VIP v3.0</title>
+    <title>DEMONS PS4 ULTRA VIP</title>
     
-   <script src="int64.js"></script>
+    <script src="int64.js"></script>
     <script src="rop.js"></script>
-    
-    <script src="webkit.js"></script>
-    
-    <script src="common/relocator.js"></script>
+    <script src="webkit.js"></script> <script src="common/relocator.js"></script>
     <script src="common/syscalls.js"></script>
     <script src="common/syscalls2.js"></script>
 
     <script src="kexploit.js"></script>
-    
     <script src="kexploit-launcher.js"></script>
 
     <style>
@@ -25,7 +21,6 @@
             --neon-purple: #9d00ff;
             --glass: rgba(255, 255, 255, 0.07);
         }
-
         body, html {
             margin: 0; padding: 0; width: 100%; height: 100%;
             background: #000; color: #fff;
@@ -33,13 +28,11 @@
             overflow: hidden; display: flex;
             align-items: center; justify-content: center;
         }
-
         #bg-canvas {
             position: fixed; top: 0; left: 0;
             width: 100%; height: 100%; z-index: -1;
             background: radial-gradient(circle at center, #0a0a1a 0%, #000 100%);
         }
-
         .glass-card {
             background: var(--glass);
             backdrop-filter: blur(25px);
@@ -49,174 +42,90 @@
             padding: 50px; text-align: center;
             box-shadow: 0 0 40px rgba(0,0,0,0.8);
             width: 80%; max-width: 650px;
-            animation: slideUp 1s cubic-bezier(0.2, 0.8, 0.2, 1);
         }
-
         h1 {
             font-size: 3.5em; font-weight: 900; margin: 0;
             background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple), var(--neon-pink));
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
             filter: drop-shadow(0 0 10px rgba(0, 210, 255, 0.4));
-            letter-spacing: 3px;
         }
-
-        .subtitle {
-            font-size: 1.1em; color: rgba(255,255,255,0.5);
-            margin-bottom: 35px; letter-spacing: 1.5px;
-        }
-
-        /* زر النيون المتفاعل */
         .neon-button {
             background: transparent; border: 2px solid var(--neon-blue);
             color: #fff; padding: 20px 60px; font-size: 22px;
             font-weight: bold; border-radius: 50px; cursor: pointer;
-            position: relative; overflow: hidden; transition: 0.3s;
-            box-shadow: 0 0 15px rgba(0, 210, 255, 0.2);
+            margin-top: 20px; transition: 0.3s;
         }
-
         .neon-button:hover {
             background: var(--neon-blue); color: #000;
             box-shadow: 0 0 30px var(--neon-blue);
         }
-
         .status-wrapper { margin-top: 40px; }
-
-        #statusText {
-            display: block; margin-bottom: 12px; font-size: 1.1em;
-            color: var(--neon-blue); transition: 0.3s;
-        }
-
+        #statusText { display: block; margin-bottom: 12px; color: var(--neon-blue); }
         .progress-container {
             width: 100%; height: 8px; background: rgba(255,255,255,0.05);
             border-radius: 20px; overflow: hidden;
         }
-
         #pBar {
             width: 0%; height: 100%;
             background: linear-gradient(90deg, var(--neon-blue), var(--neon-pink));
-            box-shadow: 0 0 15px var(--neon-blue);
             transition: width 0.4s ease;
-        }
-
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(50px); }
-            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
 <body>
-
     <canvas id="bg-canvas"></canvas>
-
     <div class="glass-card">
         <h1>DEMONS ELITE</h1>
-        <div class="subtitle">PREMIUM PS4 HOST • FIRMWARE 9.00</div>
-
-        <button id="mainBtn" class="neon-button" onclick="launchFullChain()">
-            RUN GOLDHEN
-        </button>
-
+        <div style="color:rgba(255,255,255,0.5); margin-bottom:30px;">FIRMWARE 9.00 ULTRA HOST</div>
+        <button id="mainBtn" class="neon-button" onclick="launchFullChain()">تشغيل GOLDHEN</button>
         <div class="status-wrapper">
             <span id="statusText">جاهز للبدء... ✅</span>
-            <div class="progress-container">
-                <div id="pBar"></div>
-            </div>
+            <div class="progress-container"><div id="pBar"></div></div>
         </div>
     </div>
 
     <script>
-        // 1. نظام الجزيئات الخفيف (للحفاظ على موارد المعالج)
-        const canvas = document.getElementById('bg-canvas');
-        const ctx = canvas.getContext('2d');
-        let particles = [];
-
-        function init() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-
-        class Part {
-            constructor() {
-                this.reset();
-            }
-            reset() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.s = Math.random() * 2;
-                this.v = Math.random() * 0.5;
-            }
-            draw() {
-                this.y -= this.v;
-                if (this.y < 0) this.reset();
-                ctx.fillStyle = "rgba(0, 210, 255, 0.3)";
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.s, 0, Math.PI*2);
-                ctx.fill();
-            }
-        }
-
-        for(let i=0; i<60; i++) particles.push(new Part());
-        function anim() {
-            ctx.clearRect(0,0,canvas.width, canvas.height);
-            particles.forEach(p => p.draw());
-            requestAnimationFrame(anim);
-        }
-        init(); anim();
-        window.onresize = init;
-
-        // 2. منطق الاختراق المطور
+        // تثبيت الكائنات في الذاكرة لحل مشكلة addrof
         var anchor = []; 
+        function get_addr(obj) {
+            anchor.push(obj);
+            return addrof(obj);
+        }
 
         function launchFullChain() {
-            const btn = document.getElementById('mainBtn');
-            const status = document.getElementById('statusText');
-            const pbar = document.getElementById('pBar');
-
-            btn.style.display = 'none'; // إخفاء الزر لمنع الضغط المتكرر
-            status.innerText = "جاري تهيئة الثغرة (WebKit)...";
-            pbar.style.width = "20%";
-
+            document.getElementById('mainBtn').style.display = 'none';
+            document.getElementById('statusText').innerText = "جاري تهيئة الذاكرة...";
+            document.getElementById('pBar').style.width = "30%";
+            
             setTimeout(() => {
                 try {
-                    // حل مشكلة الدالة المفقودة بالبحث عن المسميات الشائعة في ملفاتك
-                    if (typeof load_poc === 'function') {
-                        load_poc();
-                    } else if (typeof run_exploit === 'function') {
-                        run_exploit();
-                    } else {
-                        // محاولة تشغيل منطق kexploit-launcher مباشرة
-                        status.innerText = "محاولة تشغيل Kernel Exploit...";
-                        pbar.style.width = "40%";
-                        // ملاحظة: إذا كان ملف kexploit-launcher مبرمج للعمل تلقائياً، سيكمل من هنا
-                    }
+                    // تشغيل الدالة المسؤولة عن بدء الاستغلال
+                    if (typeof load_poc === 'function') load_poc();
+                    else if (typeof run_exploit === 'function') run_exploit();
                 } catch(e) {
-                    status.innerText = "خطأ في التشغيل: " + e.message;
-                    status.style.color = "var(--neon-pink)";
-                    btn.style.display = 'inline-block';
+                    alert("خطأ: " + e.message);
                 }
             }, 500);
         }
 
-        // تحسين الـ Event Listener الخاص بملفات الثغرة الأصلية
         window.addEventListener("info", (e) => {
             const msg = e.detail;
-            const status = document.getElementById('statusText');
-            const pbar = document.getElementById('pBar');
-            
-            status.innerText = msg;
-
-            // تحديث الشريط بناءً على الكلمات المفتاحية من kexploit.js
-            if(msg.toLowerCase().includes("usb") || msg.includes("فلاشة")) {
-                pbar.style.width = "75%";
-                status.style.color = "#ffff00"; // لون تنبيه للفلاشة
-                status.style.fontWeight = "bold";
-            }
-            if(msg.toLowerCase().includes("success") || msg.includes("تم بنجاح")) {
-                pbar.style.width = "100%";
-                status.style.color = "#00ff88";
-                pbar.style.background = "#00ff88";
-            }
+            document.getElementById('statusText').innerText = msg;
+            if(msg.includes("Waiting for USB")) document.getElementById('pBar').style.width = "70%";
+            if(msg.includes("Success")) document.getElementById('pBar').style.width = "100%";
         });
+
+        // أنيميشن الخلفية الخفيف
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+        function anim() {
+            ctx.fillStyle = "rgba(0,0,0,0.05)"; ctx.fillRect(0,0,canvas.width,canvas.height);
+            ctx.fillStyle = "#00d2ff";
+            for(let i=0; i<3; i++) ctx.fillRect(Math.random()*canvas.width, Math.random()*canvas.height, 2, 2);
+            requestAnimationFrame(anim);
+        }
+        anim();
     </script>
 </body>
 </html>
