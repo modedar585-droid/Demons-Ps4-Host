@@ -2,12 +2,12 @@
 <html lang="ar" dir="rtl" manifest="cache.manifest">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Demons PS4 Host - v9.00 Elite</title>
     
-    <script src="common/relocator.js"></script>
-    <script src="common/syscalls.js"></script>
-    <script src="common/syscalls2.js"></script>
+    <script src="Common/relocator.js"></script>
+    <script src="Common/syscalls.js"></script>
+    <script src="Common/syscalls2.js"></script>
+
     <script src="int64.js"></script>
     <script src="rop.js"></script>
     <script src="webkit.js"></script>
@@ -16,36 +16,27 @@
     <script src="fakeusb.js"></script>
 
     <style>
-        :root { --neon-blue: #00d2ff; --main-bg: #030305; }
-        body { background-color: var(--main-bg); color: white; text-align: center; font-family: sans-serif; padding-top: 100px; }
-        .status-bar { border: 1px solid var(--neon-blue); padding: 15px; border-radius: 50px; display: inline-block; margin-bottom: 20px; }
-        .btn { background: rgba(255,255,255,0.1); border: 1px solid var(--neon-blue); color: white; padding: 20px 40px; border-radius: 15px; cursor: pointer; font-size: 20px; }
+        body { background: #000; color: #00d2ff; text-align: center; font-family: sans-serif; padding-top: 15%; }
+        .status { border: 2px solid #00d2ff; padding: 20px; border-radius: 15px; display: inline-block; }
+        .btn { background: #00d2ff; color: #000; padding: 15px 30px; border-radius: 10px; cursor: pointer; border: none; font-weight: bold; }
     </style>
 </head>
 <body>
-    <h1>DEMONS ELITE</h1>
-    <div class="status-bar" id="statusText">بانتظار التحميل...</div>
+    <h1>DEMONS PS4 HOST</h1>
+    <div class="status" id="statusText">جاهز للعمل ✅</div>
     <br><br>
-    <button class="btn" onclick="startJailbreak()">تشغيل GoldHEN</button>
+    <button class="btn" onclick="start()">تشغيل GoldHEN</button>
 
     <script>
-        window.onload = () => {
-            document.getElementById('statusText').innerText = "تم تحميل الملفات بنجاح ✅";
-        };
-
-        function startJailbreak() {
-            const status = document.getElementById('statusText');
-            status.innerText = "جاري تفعيل الثغرة... (لو ظهر خطأ، رفرش الصفحة)";
-            
-            // إضافة تأخير بسيط لضمان استقرار المتصفح
-            setTimeout(() => {
+        function start() {
+            document.getElementById('statusText').innerText = "جاري الاختراق.. استعد للفلاشة";
+            setTimeout(function(){
                 try {
-                    run_exploit(); 
+                    run_exploit();
                 } catch(e) {
-                    // لو لسه فيه ملف محملش، هنحاول نشغله يدوي
-                    location.reload();
+                    alert("خطأ: " + e.message);
                 }
-            }, 1000);
+            }, 500);
         }
     </script>
 </body>
